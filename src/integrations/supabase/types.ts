@@ -14,13 +14,300 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      auto_reply_configs: {
+        Row: {
+          after_hours: string
+          enabled: boolean
+          greeting: string
+          handoff: string
+          id: string
+          keyword_rules: Json
+          questions: Json
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          after_hours?: string
+          enabled?: boolean
+          greeting?: string
+          handoff?: string
+          id?: string
+          keyword_rules?: Json
+          questions?: Json
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          after_hours?: string
+          enabled?: boolean
+          greeting?: string
+          handoff?: string
+          id?: string
+          keyword_rules?: Json
+          questions?: Json
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auto_reply_configs_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: true
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      business_profiles: {
+        Row: {
+          business_name: string
+          created_at: string
+          id: string
+          industry: string
+          onboarded: boolean
+          tenant_id: string
+          updated_at: string
+          whatsapp_last_synced_at: string | null
+          whatsapp_number: string | null
+          whatsapp_status: string
+          working_hours: Json
+        }
+        Insert: {
+          business_name?: string
+          created_at?: string
+          id?: string
+          industry?: string
+          onboarded?: boolean
+          tenant_id: string
+          updated_at?: string
+          whatsapp_last_synced_at?: string | null
+          whatsapp_number?: string | null
+          whatsapp_status?: string
+          working_hours?: Json
+        }
+        Update: {
+          business_name?: string
+          created_at?: string
+          id?: string
+          industry?: string
+          onboarded?: boolean
+          tenant_id?: string
+          updated_at?: string
+          whatsapp_last_synced_at?: string | null
+          whatsapp_number?: string | null
+          whatsapp_status?: string
+          working_hours?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_profiles_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: true
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversation_messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          delivery_status: string
+          direction: string
+          external_id: string | null
+          id: string
+          is_auto: boolean
+          tenant_id: string
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          delivery_status?: string
+          direction: string
+          external_id?: string | null
+          id?: string
+          is_auto?: boolean
+          tenant_id: string
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          delivery_status?: string
+          direction?: string
+          external_id?: string | null
+          id?: string
+          is_auto?: boolean
+          tenant_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversation_messages_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversations: {
+        Row: {
+          created_at: string
+          id: string
+          last_message_at: string
+          last_message_preview: string | null
+          lead_id: string
+          tenant_id: string
+          unread_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          last_message_preview?: string | null
+          lead_id: string
+          tenant_id: string
+          unread_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_message_at?: string
+          last_message_preview?: string | null
+          lead_id?: string
+          tenant_id?: string
+          unread_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: true
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lead_events: {
+        Row: {
+          created_at: string
+          id: string
+          lead_id: string
+          payload: Json
+          tenant_id: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lead_id: string
+          payload?: Json
+          tenant_id: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lead_id?: string
+          payload?: Json
+          tenant_id?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_events_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lead_events_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          created_at: string
+          id: string
+          name: string | null
+          phone: string
+          status: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          phone: string
+          status?: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string | null
+          phone?: string
+          status?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tenants: {
+        Row: {
+          created_at: string
+          id: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          owner_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          owner_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_tenant_member: { Args: { _tenant: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

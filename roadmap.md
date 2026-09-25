@@ -1,0 +1,11 @@
+# LeadCatch SA roadmap
+- [ ] Design system + app shell (sidebar, logo)
+- [ ] Database schema + RLS + realtime
+- [ ] Auth (email + Google, POPIA note)
+- [ ] Onboarding (3 steps)
+- [ ] Dashboard
+- [ ] Inbox: live conversations, sending, unread, realtime
+- [ ] Auto-Reply: greeting, questions, after-hours, handoff, keyword rules, enable toggle, preview
+- [ ] Settings
+- [ ] Connect external Baileys service (Render) — send + webhook
+- [ ] Handoff docs (about-this-app, CLAUDE, AGENTS, cursor/windsurf/copilot, CHANGELOG, README) incl. env vars + deploy
