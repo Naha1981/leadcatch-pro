@@ -155,7 +155,7 @@ function InboxPage() {
   );
 }
 
-function Avatar({ name, phone }: { name?: string | null; phone: string }) {
+function Avatar({ name, phone }: { name?: string | null | undefined; phone: string }) {
   const initials = name ? name.split(" ").map((s) => s[0]).slice(0, 2).join("").toUpperCase() : phone.slice(-2);
   return <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground">{initials}</div>;
 }
@@ -219,7 +219,7 @@ function Thread({ convo, tenantId, onBack }: { convo: Convo; tenantId: string; o
 
   async function setStatus(status: string) {
     const { error } = await supabase.from("leads").update({ status, updated_at: new Date().toISOString() }).eq("id", lead.id);
-    if (error) return toast.error("Couldn't update status");
+    if (error) { toast.error("Could not update status"); return; }
     await supabase.from("lead_events").insert({ tenant_id: tenantId, lead_id: lead.id, type: "status_changed", payload: { status } });
     qc.invalidateQueries({ queryKey: ["conversations"] });
   }

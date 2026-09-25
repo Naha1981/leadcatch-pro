@@ -12,13 +12,13 @@ const STATUS_STYLE: Record<string, string> = {
 
 export function StatusBadge({ status }: { status: string }) {
   return (
-    <span className={`inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-medium capitalize ${STATUS_STYLE[status] ?? STATUS_STYLE.closed}`}>
+    <span className={`inline-flex items-center rounded-lg px-2 py-0.5 text-[11px] font-medium capitalize ${STATUS_STYLE[status] ?? STATUS_STYLE["closed"]}`}>
       {status}
     </span>
   );
 }
 
-export function PageHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: ReactNode }) {
+export function PageHeader({ title, subtitle, action }: { title: string; subtitle?: string | undefined; action?: ReactNode }) {
   return (
     <div className="flex items-end justify-between gap-4">
       <div>

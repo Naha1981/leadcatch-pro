@@ -66,7 +66,7 @@ function SettingsPage() {
       .update({ business_name: name.trim(), industry: industry.trim(), working_hours: hours!, updated_at: new Date().toISOString() })
       .eq("tenant_id", ws!.tenantId);
     setSaving(false);
-    if (error) return toast.error("Couldn't save");
+    if (error) { toast.error("Could not save"); return; }
     toast.success("Settings saved");
     qc.invalidateQueries({ queryKey: ["workspace"] });
   }

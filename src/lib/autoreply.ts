@@ -57,7 +57,7 @@ export function decideReplies(opts: {
     if (!isWithinHours(hours, opts.now)) return [config.after_hours].filter(Boolean);
     return [config.greeting, qs[0]].filter((m): m is string => !!m && !!m.trim());
   }
-  if (inboundIndex <= qs.length) return [qs[inboundIndex - 1]];
+  if (inboundIndex <= qs.length) return [qs[inboundIndex - 1] ?? ""].filter(Boolean);
   if (inboundIndex === qs.length + 1) return [config.handoff].filter(Boolean);
   return [];
 }

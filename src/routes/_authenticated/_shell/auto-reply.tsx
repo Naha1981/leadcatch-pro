@@ -71,7 +71,7 @@ function AutoReplyPage() {
       })
       .eq("tenant_id", ws.tenantId);
     setSaving(false);
-    if (error) return toast.error("Couldn't save");
+    if (error) { toast.error("Could not save"); return; }
     setSaved(true);
     toast.success("Auto-reply saved");
     qc.invalidateQueries({ queryKey: ["workspace"] });

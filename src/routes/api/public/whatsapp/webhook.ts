@@ -80,7 +80,7 @@ async function handleMessage(db: any, tenantId: string, p: OperatorPayload) {
   const d = p.data ?? {};
   const chatId: string = d.chatId ?? "";
   if (!chatId || chatId.endsWith("@g.us") || chatId === "status@broadcast") return;
-  const phone = chatId.split("@")[0].replace(/\D/g, "");
+  const phone = (chatId.split("@")[0] ?? "").replace(/\D/g, "");
   if (!phone) return;
   const text: string = d.text ?? (d.media ? `[${d.messageType ?? "media"}]` : "");
   if (!text) return;
