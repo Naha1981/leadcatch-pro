@@ -67,6 +67,7 @@ export type Database = {
           onboarded: boolean
           tenant_id: string
           updated_at: string
+          wa_account_id: string | null
           whatsapp_last_synced_at: string | null
           whatsapp_number: string | null
           whatsapp_status: string
@@ -80,6 +81,7 @@ export type Database = {
           onboarded?: boolean
           tenant_id: string
           updated_at?: string
+          wa_account_id?: string | null
           whatsapp_last_synced_at?: string | null
           whatsapp_number?: string | null
           whatsapp_status?: string
@@ -93,6 +95,7 @@ export type Database = {
           onboarded?: boolean
           tenant_id?: string
           updated_at?: string
+          wa_account_id?: string | null
           whatsapp_last_synced_at?: string | null
           whatsapp_number?: string | null
           whatsapp_status?: string
@@ -301,6 +304,47 @@ export type Database = {
           owner_id?: string
         }
         Relationships: []
+      }
+      whatsapp_webhook_events: {
+        Row: {
+          event: string
+          id: string
+          message_id: string | null
+          payload: Json
+          processed_at: string | null
+          processing_error: string | null
+          received_at: string
+          tenant_id: string | null
+        }
+        Insert: {
+          event: string
+          id?: string
+          message_id?: string | null
+          payload: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          received_at?: string
+          tenant_id?: string | null
+        }
+        Update: {
+          event?: string
+          id?: string
+          message_id?: string | null
+          payload?: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          received_at?: string
+          tenant_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "whatsapp_webhook_events_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenants"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
