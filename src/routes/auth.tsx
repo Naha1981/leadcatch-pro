@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/Logo";
 
 export const Route = createFileRoute("/auth")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Sign in — LeadCatch SA" },
